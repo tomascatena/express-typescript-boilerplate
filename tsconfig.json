@@ -7,11 +7,6 @@
     "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
     "module": "commonjs" /* Specify what module code is generated. */,
     "moduleResolution": "node",
     "noEmit": false,
@@ -32,9 +27,11 @@
   },
   "exclude": [
     "node_modules",
-    ".vscode"
+    ".vscode",
+    "dist",
+    "logs"
   ],
   "include": [
-    "src/**/*.ts",
+    "src/**/*.ts"
   ]
 }

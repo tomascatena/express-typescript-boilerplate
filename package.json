@@ -4,6 +4,10 @@
   "description": "Express Typescript REST Server Boilerplate",
   "author": "Tomás Catena",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomascatena/express-typescript-boilerplate"
+  },
   "keywords": [],
   "main": "dist/http-server.js",
   "scripts": {
