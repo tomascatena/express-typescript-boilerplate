@@ -7,8 +7,6 @@ import { uncaughtExceptionHandler } from '@/utils/uncaughtExceptionHandler';
 import { unhandledRejectionHandler } from '@/utils/unhandledRejectionHandler';
 import http from 'http';
 
-require('module-alias/register');
-
 export const server = http.createServer(app);
 
 server.listen(env.PORT, () => {
