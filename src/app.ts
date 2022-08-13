@@ -1,11 +1,9 @@
 import { env } from '@/config/config';
-import {
-  errorHandler,
-  transformErrorToAPIError,
-} from '@/middleware/error';
+import { errorHandler } from '@/middleware/errorHandler';
 import { expressWinstonLogger } from './config/logger';
 import { morganHttpLogger } from '@/config/morgan';
 import { notFound } from '@/middleware/notFound';
+import { transformErrorToAPIError } from '@/middleware/transformErrorToAPIError';
 import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
