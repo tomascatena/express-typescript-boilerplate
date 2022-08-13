@@ -2,6 +2,9 @@
   "env": {
     "node": true
   },
+  "ignorePatterns": [
+    "dist/*"
+  ],
   "extends": [
     "airbnb-typescript",
     "airbnb-base",
