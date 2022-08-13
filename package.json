@@ -7,8 +7,8 @@
   "keywords": [],
   "main": "dist/http-server.js",
   "scripts": {
-    "build": "tsc --build",
-    "start": "tsc && node dist/http-server.js",
+    "build": "tsc --build && tsc-alias",
+    "start": "tsc --build && tsc-alias && node dist/http-server.js",
     "dev": "./node_modules/nodemon/bin/nodemon.js -e ts --no-stdin --exec \"npm run start\"",
     "lint": "eslint . --ext .js,.ts",
     "lint:fix": "eslint . --ext .js,.ts --fix"
@@ -29,7 +29,8 @@
     "morgan": "^1.10.0",
     "swagger-ui-express": "^4.5.0",
     "winston": "^3.8.1",
-    "winston-daily-rotate-file": "^4.7.1"
+    "winston-daily-rotate-file": "^4.7.1",
+    "xss-clean": "^0.1.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
@@ -54,6 +55,7 @@
     "eslint-plugin-security": "^1.5.0",
     "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
     "nodemon": "^2.0.19",
+    "tsc-alias": "^1.7.0",
     "typescript": "^4.7.4"
   }
 }

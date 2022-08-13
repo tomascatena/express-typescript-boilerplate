@@ -3,6 +3,7 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
+    "checkJs": false,
     "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
@@ -21,17 +22,19 @@
         "./src/*"
       ]
     },
+    "removeComments": true,
     "resolveJsonModule": true,
     "rootDir": "./src",
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "sourceMap": false,
     "strict": true /* Enable all strict type-checking options. */,
-    "target": "es5",
+    "target": "es6"
   },
   "exclude": [
     "node_modules",
-    "**/*.spec.ts"
+    ".vscode"
   ],
   "include": [
-    "./src/**/*"
+    "src/**/*.ts",
   ]
 }

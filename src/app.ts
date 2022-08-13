@@ -9,7 +9,6 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import mongoSanitize from 'express-mongo-sanitize';
 import routes from '@/routes/v1';
-// @ts-ignore
 import xssClean from 'xss-clean';
 
 export const app = express();

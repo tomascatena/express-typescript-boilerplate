@@ -1,22 +1,25 @@
 import { env } from '@/config/config';
 
-const { version } = require('../../../package.json');
+const {
+  version,
+  name,
+  description,
+  author,
+} = require('../../../package.json');
 
 const swaggerDef = {
   openapi: '3.0.0',
   info: {
-    title: 'Discord Clone Backend',
+    title: name,
     version,
-    description:
-      'This is a simple CRUD API application made with Express and documented with Swagger',
+    description,
     license: {
       name: 'MIT',
       url: 'https://spdx.org/licenses/MIT.html',
     },
     contact: {
-      name: 'Tomás Catena',
-      url: 'https://www.tomascatena.com',
-      email: 'tomascatena@gmail.com',
+      name: author,
+      url: 'https://www.github.com/',
     },
   },
   host: `localhost:${env.PORT}`,
