@@ -3,6 +3,5 @@ export const bearerAuth = {
   scheme: 'bearer',
   bearerFormat: 'JWT',
   in: 'header',
-  description:
-    'JWT Authorization header using the Bearer scheme. Example: "Authorization: Bearer {token}"',
+  description: 'JWT Authorization header using the Bearer scheme. Example: "Authorization: Bearer {token}"',
 };
