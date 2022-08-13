@@ -8,10 +8,7 @@ const router = express.Router();
  * @desc    Login a user
  * @access  Public
  */
-router.post(
-  '/login',
-  authController.loginUser,
-);
+router.post('/login', authController.loginUser);
 
 /**
  * @route   GET api/v1/auth

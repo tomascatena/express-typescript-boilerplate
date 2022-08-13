@@ -56,7 +56,7 @@ app.use(expressWinstonLogger.error);
 // Fallback for not found requests
 app.use(notFound);
 
-// Convert error to ApiError, if needed
+// Convert error to instance of ApiError, if needed
 app.use(transformErrorToAPIError);
 
 // Error handler for failed requests

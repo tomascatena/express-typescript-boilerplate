@@ -1,0 +1,15 @@
+{
+  "apps": [
+    {
+      "autorestart": true,
+      "env": {
+        "NODE_ENV": "production"
+      },
+      "instances": 1,
+      "name": "boilerplate-api",
+      "script": "dist/http-server.js",
+      "time": true,
+      "watch": false
+    }
+  ]
+}

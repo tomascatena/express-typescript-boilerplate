@@ -17,6 +17,13 @@
     "sort-imports-es6-autofix"
   ],
   "rules": {
+    "@typescript-eslint/lines-between-class-members": [
+      "error",
+      "always",
+      {
+        "exceptAfterSingleLine": true
+      }
+    ],
     "@typescript-eslint/no-unused-vars": [
       "error"
     ],
@@ -25,6 +32,13 @@
     ],
     "camelcase": "off",
     "comma-dangle": "off",
+    "comma-spacing": [
+      "error",
+      {
+        "after": true,
+        "before": false
+      }
+    ],
     "consistent-return": "off",
     "func-names": "off",
     "import/extensions": [
@@ -42,12 +56,6 @@
     "import/order": "off",
     "import/prefer-default-export": "off",
     "jest/expect-expect": "off",
-    "lines-between-class-members": [
-      "error",
-      {
-        "exceptAfterSingleLine": true
-      }
-    ],
     "max-len": [
       "error",
       {
