@@ -1,6 +1,6 @@
 import { RequestWithBody } from '@/typings/typings';
 import { Response } from 'express';
-import { catchAsync } from '@/utils/catchAsync';
+import { catchAsync } from '@/utils/catchAsync/catchAsync';
 import httpStatus from 'http-status-codes';
 
 /**

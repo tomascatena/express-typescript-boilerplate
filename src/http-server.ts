@@ -1,10 +1,10 @@
 import { Logger } from '@/config/logger';
-import { SIGTERMHandler } from '@/utils/SIGTERMHandler';
+import { SIGTERMHandler } from '@/utils/nodeHandlers/SIGTERMHandler';
 import { app } from './app';
 import { connectDB } from '@/config/connectDB';
 import { env } from '@/config/config';
-import { uncaughtExceptionHandler } from '@/utils/uncaughtExceptionHandler';
-import { unhandledRejectionHandler } from '@/utils/unhandledRejectionHandler';
+import { uncaughtExceptionHandler } from '@/utils/nodeHandlers/uncaughtExceptionHandler';
+import { unhandledRejectionHandler } from '@/utils/nodeHandlers/unhandledRejectionHandler';
 
 export const server = app.listen(env.PORT, () => {
   Logger.info(`HTTP Server listening on port ${env.PORT}`);

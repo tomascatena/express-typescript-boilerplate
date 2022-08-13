@@ -1,8 +1,6 @@
 import { StatusCodes } from 'http-status-codes';
-import {
-  getSwaggerRequestBodySchema,
-  getSwaggerResponseBodySchema,
-} from '@/utils/swagger/getSwaggerSchema';
+import { getSwaggerRequestBodySchema } from '@/utils/swagger/getSwaggerRequestBodySchema';
+import { getSwaggerResponseBodySchema } from '@/utils/swagger/getSwaggerResponseBodySchema';
 
 const loginUserRequestBody = getSwaggerRequestBodySchema({
   isRequired: true,
