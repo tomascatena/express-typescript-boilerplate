@@ -1,5 +1,8 @@
 import { env } from '@/config/config';
-import { errorHandler, transformErrorToAPIError } from '@/middleware/error';
+import {
+  errorHandler,
+  transformErrorToAPIError,
+} from '@/middleware/error';
 import { expressWinstonLogger } from './config/logger';
 import { morganHttpLogger } from '@/config/morgan';
 import { notFound } from '@/middleware/notFound';

@@ -8,10 +8,10 @@
   "main": "dist/http-server.js",
   "scripts": {
     "build": "tsc --build && tsc-alias",
-    "start": "tsc --build && tsc-alias && node dist/http-server.js",
+    "start": "npm run build && node dist/http-server.js",
     "dev": "./node_modules/nodemon/bin/nodemon.js -e ts --no-stdin --exec \"npm run start\"",
-    "lint": "eslint . --ext .js,.ts",
-    "lint:fix": "eslint . --ext .js,.ts --fix"
+    "eslint": "eslint . --ext .js,.ts",
+    "eslint:fix": "eslint . --ext .js,.ts --fix"
   },
   "dependencies": {
     "cors": "^2.8.5",
