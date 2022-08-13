@@ -8,33 +8,44 @@
     "airbnb-typescript/base",
     "plugin:security/recommended"
   ],
-  "plugins": ["security", "sort-imports-es6-autofix"],
   "parserOptions": {
-    "project": "./tsconfig.json",
-    "ecmaVersion": 2021
+    "ecmaVersion": 2021,
+    "project": "./tsconfig.json"
   },
+  "plugins": ["security", "sort-imports-es6-autofix"],
   "rules": {
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "@typescript-eslint/quotes": ["error", "backtick"],
+    "camelcase": "off",
+    "comma-dangle": "off",
+    "consistent-return": "off",
+    "func-names": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "": "never",
+        "js": "never",
+        "jsx": "never",
+        "mjs": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
     "import/order": "off",
+    "import/prefer-default-export": "off",
+    "jest/expect-expect": "off",
+    "multiline-ternary": "off",
+    "no-console": "off",
+    "no-param-reassign": "off",
+    "no-underscore-dangle": "off",
+    "no-unused-vars": "off",
+    "no-use-before-define": "off",
     "quotes": ["error", "backtick"],
     "react/jsx-filename-extension": "off",
-    "import/prefer-default-export": "off",
-    "no-console": "off",
-    "func-names": "off",
-    "no-underscore-dangle": "off",
-    "consistent-return": "off",
-    "jest/expect-expect": "off",
     "security/detect-object-injection": "off",
-    "no-param-reassign": "off",
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": ["error"],
-    "comma-dangle": "off",
-    "space-before-function-paren": "off",
-    "multiline-ternary": "off",
-    "no-use-before-define": "off",
     "semi": [2, "always"],
-    "camelcase": "off",
-    "@typescript-eslint/quotes": ["error", "backtick"],
-    "@typescript-eslint/no-use-before-define": ["error"],
     "sort-imports-es6-autofix/sort-imports-es6": [
       2,
       {
@@ -43,17 +54,6 @@
         "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
       }
     ],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never",
-        "mjs": "never",
-        "": "never"
-      }
-    ]
+    "space-before-function-paren": "off"
   }
 }
