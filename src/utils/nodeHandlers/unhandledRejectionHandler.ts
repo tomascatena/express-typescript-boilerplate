@@ -1,6 +1,11 @@
 import { Logger, LoggerToFile } from '@/config/logger';
 import { env } from '@/config/config';
 
+/**
+ * Custom unhandledRejection handler. It will log the error.
+ * @param err - The error thrown
+ * @param p - The promise that was rejected
+ */
 export const unhandledRejectionHandler = (
   err: Error | undefined,
   p: Promise<unknown>,

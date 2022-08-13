@@ -5,6 +5,13 @@ import { env } from '@/config/config';
 import httpStatus, { ReasonPhrases } from 'http-status-codes';
 import mongoose from 'mongoose';
 
+/**
+ * Transforms the error into an instance of ApiError (if is not already) and pass it to the next middleware.
+ * @param err - The error thrown
+ * @param req - The request object
+ * @param res - The response object
+ * @param next - The next middleware function
+ */
 export const transformErrorToAPIError = (
   err: any,
   req: Request,
@@ -31,6 +38,13 @@ export const transformErrorToAPIError = (
   next(error);
 };
 
+/**
+ * Handles the error and logs it.
+ * @param err - The error thrown
+ * @param req - The request object
+ * @param res - The response object
+ * @param next - The next middleware function
+ */
 export const errorHandler = (
   err: ApiError,
   req: Request,

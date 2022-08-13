@@ -6,6 +6,9 @@ import { env } from '@/config/config';
 import { uncaughtExceptionHandler } from '@/utils/nodeHandlers/uncaughtExceptionHandler';
 import { unhandledRejectionHandler } from '@/utils/nodeHandlers/unhandledRejectionHandler';
 
+/**
+ * Express http server.
+ */
 export const server = app.listen(env.PORT, () => {
   Logger.info(`HTTP Server listening on port ${env.PORT}`);
 

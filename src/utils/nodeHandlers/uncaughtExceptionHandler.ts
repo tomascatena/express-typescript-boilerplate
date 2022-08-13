@@ -3,6 +3,11 @@ import { env } from '@/config/config';
 import { exitHandler } from './exitHandler';
 import { server } from '@/http-server';
 
+/**
+ * Custom uncaughtException handler. It will log the error, close the server and exit the process.
+ * @param err - The error thrown
+ * @param origin - The origin of the error
+ */
 export const uncaughtExceptionHandler = (
   err: Error,
   origin: NodeJS.UncaughtExceptionOrigin,
