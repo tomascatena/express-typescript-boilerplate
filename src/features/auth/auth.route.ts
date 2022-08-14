@@ -8,13 +8,19 @@ const router = express.Router();
  * @desc    Login a user
  * @access  Public
  */
-router.post('/login', authController.loginUser);
+router.post(
+  '/login',
+  authController.loginUser,
+);
 
 /**
  * @route   GET api/v1/auth
  * @desc    Get auth user
  * @access  Private
  */
-router.get('/me', authController.getUser);
+router.get(
+  '/me',
+  authController.getUser,
+);
 
 export default router;

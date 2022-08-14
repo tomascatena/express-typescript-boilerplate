@@ -3,9 +3,9 @@ import { iterateOverValues } from './iterateOverValues';
 type GeneralObject = { [key: string]: any };
 
 type GetSwaggerRequestBodySchemaParams = {
+  isRequired?: boolean;
   requestBody: GeneralObject;
   requiredFields?: string[];
-  isRequired?: boolean;
 };
 
 /**
@@ -16,9 +16,9 @@ type GetSwaggerRequestBodySchemaParams = {
  * @returns Swagger request body schema
  */
 export const getSwaggerRequestBodySchema = ({
+  isRequired = false,
   requestBody,
   requiredFields,
-  isRequired = false,
 }: GetSwaggerRequestBodySchemaParams) => {
   const requestBodySwaggerSchema = {};
 

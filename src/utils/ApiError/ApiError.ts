@@ -18,10 +18,10 @@ export class ApiError extends Error {
   isOperational: boolean;
 
   constructor({
-    statusCode,
-    message,
     isOperational = true,
+    message,
     stack = '',
+    statusCode,
   }: ApiErrorConstructor) {
     super(message);
 

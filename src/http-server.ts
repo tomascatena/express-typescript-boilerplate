@@ -7,7 +7,7 @@ import { uncaughtExceptionHandler } from '@/utils/nodeHandlers/uncaughtException
 import { unhandledRejectionHandler } from '@/utils/nodeHandlers/unhandledRejectionHandler';
 
 /**
- * Express http server.
+ * The main function. Express http server
  */
 export const server = app.listen(env.PORT, () => {
   Logger.info(`HTTP Server listening on port ${env.PORT}`);

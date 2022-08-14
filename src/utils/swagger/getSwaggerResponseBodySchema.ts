@@ -4,8 +4,8 @@ import omit from 'lodash/omit';
 export type GeneralObject = { [key: string]: any };
 
 type GetSwaggerResponseBodySchemaParams = {
-  responseBody: GeneralObject;
   description?: string;
+  responseBody: GeneralObject;
 };
 
 /**
@@ -14,8 +14,8 @@ type GetSwaggerResponseBodySchemaParams = {
  * @returns Swagger response body schema
  */
 export const getSwaggerResponseBodySchema = ({
-  description,
   responseBody,
+  description,
 }: GetSwaggerResponseBodySchemaParams) => {
   const responseBodySwaggerSchema = {};
 

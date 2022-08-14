@@ -32,9 +32,9 @@ export const errorHandler = (
   }
 
   LoggerToFile.error({
+    isOperational: err.isOperational,
     message: err.message,
     name: err.name,
-    isOperational: err.isOperational,
     stack: err.stack,
     statusCode: err.statusCode,
   });

@@ -32,8 +32,14 @@ const options: swaggerUi.SwaggerOptions = {
   },
 };
 
-router.use('/', swaggerUi.serve);
+router.use(
+  '/',
+  swaggerUi.serve,
+);
 
-router.get('/', swaggerUi.setup(swaggerDocumentation, options));
+router.get(
+  '/',
+  swaggerUi.setup(swaggerDocumentation, options),
+);
 
 export default router;

@@ -27,10 +27,10 @@ export const transformErrorToAPIError = (
     const message = error.message || ReasonPhrases.INTERNAL_SERVER_ERROR;
 
     error = new ApiError({
-      statusCode,
-      message,
       isOperational: false,
+      message,
       stack: err.stack,
+      statusCode,
     });
   }
 

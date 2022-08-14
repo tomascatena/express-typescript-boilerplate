@@ -8,30 +8,28 @@ const {
 } = require('../../../package.json');
 
 const swaggerDef = {
-  openapi: '3.0.0',
+  basePath: '/api/v1',
+  consumes: ['application/json'],
+  host: `localhost:${env.PORT}`,
   info: {
-    title: name,
-    version,
+    contact: {
+      name: author,
+      url: 'https://www.github.com/',
+    },
     description,
     license: {
       name: 'MIT',
       url: 'https://spdx.org/licenses/MIT.html',
     },
-    contact: {
-      name: author,
-      url: 'https://www.github.com/',
-    },
+    title: name,
+    version,
   },
-  host: `localhost:${env.PORT}`,
-  basePath: '/api/v1',
-  schemes: ['http', 'https'],
-  consumes: ['application/json'],
+  openapi: '3.0.0',
   produces: ['application/json'],
-  servers: [
-    {
-      url: `http://localhost:${env.PORT}/api/v1`,
-    },
-  ],
+  schemes: ['http', 'https'],
+  servers: [{
+    url: `http://localhost:${env.PORT}/api/v1`,
+  }],
 };
 
 export default swaggerDef;
