@@ -2,7 +2,7 @@ import {
   Logger,
   LoggerToFile,
 } from './logger';
-import { env } from './config';
+import { env } from './env';
 import mongoose from 'mongoose';
 
 const logError = (err: Error | mongoose.Error) => {

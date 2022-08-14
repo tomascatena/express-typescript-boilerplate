@@ -1,5 +1,5 @@
 import { authLimiter } from '@/middleware/authLimiter';
-import { env } from '@/config/config';
+import { env } from '@/config/env';
 import { errorHandler } from '@/middleware/errorHandler';
 import { expressWinstonLogger } from './config/logger';
 import { morganHttpLogger } from '@/config/morgan';

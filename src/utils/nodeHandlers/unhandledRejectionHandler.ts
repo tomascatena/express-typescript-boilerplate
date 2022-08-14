@@ -1,5 +1,5 @@
 import { Logger, LoggerToFile } from '@/config/logger';
-import { env } from '@/config/config';
+import { env } from '@/config/env';
 
 /**
  * Custom unhandledRejection handler. It will log the error.

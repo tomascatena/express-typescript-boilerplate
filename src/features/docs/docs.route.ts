@@ -1,5 +1,5 @@
 import { bearerAuth } from './securitySchemes.swagger';
-import { env } from '@/config/config';
+import { env } from '@/config/env';
 import authPaths from '@/features/auth/swagger/auth.swagger.paths';
 import express from 'express';
 import swaggerDefinition from './swaggerDef';

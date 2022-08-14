@@ -2,12 +2,12 @@ import { Logger } from '@/config/logger';
 import { SIGTERMHandler } from '@/utils/nodeHandlers/SIGTERMHandler';
 import { app } from './app';
 import { connectDB } from '@/config/connectDB';
-import { env } from '@/config/config';
+import { env } from '@/config/env';
 import { uncaughtExceptionHandler } from '@/utils/nodeHandlers/uncaughtExceptionHandler';
 import { unhandledRejectionHandler } from '@/utils/nodeHandlers/unhandledRejectionHandler';
 
 /**
- * The main function. Express http server
+ * The main function. Express http server.
  */
 export const server = app.listen(env.PORT, () => {
   Logger.info(`HTTP Server listening on port ${env.PORT}`);

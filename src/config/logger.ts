@@ -1,5 +1,5 @@
 import 'winston-daily-rotate-file';
-import { env } from './config';
+import { env } from './env';
 import expressWinston from 'express-winston';
 import winston from 'winston';
 
