@@ -1,6 +1,7 @@
 import rateLimit from 'express-rate-limit';
 
 /**
+ * @middleware
  * @description - This is a middleware that is used to limit the number of requests to the auth routes.
  */
 export const authLimiter = rateLimit({

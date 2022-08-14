@@ -4,7 +4,8 @@ import httpStatus, { ReasonPhrases } from 'http-status-codes';
 import mongoose from 'mongoose';
 
 /**
- * Transforms the error into an instance of ApiError (if is not already) and pass it to the next middleware.
+ * @middleware
+ * @description - Transforms the error into an instance of ApiError (if is not already) and pass it to the next middleware.
  * @param err - The error thrown
  * @param req - The request object
  * @param res - The response object

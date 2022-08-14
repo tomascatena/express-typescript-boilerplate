@@ -5,7 +5,8 @@ import { env } from '@/config/config';
 import httpStatus, { ReasonPhrases } from 'http-status-codes';
 
 /**
- * Handles the error and logs it.
+ * @middleware
+ * @description - Handles the error and logs it.
  * @param err - The error thrown
  * @param req - The request object
  * @param res - The response object

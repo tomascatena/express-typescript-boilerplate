@@ -3,7 +3,8 @@ import { validationResult } from 'express-validator';
 import httpStatus from 'http-status-codes';
 
 /**
- * Will check if there are any validation errors, and if so, will return the errors in the response.
+ * @middleware
+ * @description - Will check if there are any validation errors, and if so, will return the errors in the response.
  * @param statusCode - The status code of the error. Default: 400 (Bad Request)
  * @param responseMessage - The message of the error. If not provided, the default message is used ('Invalid information')
  * @returns
