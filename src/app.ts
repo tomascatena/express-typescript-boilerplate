@@ -1,8 +1,10 @@
+import { authLimiter } from '@/middleware/authLimiter';
 import { env } from '@/config/config';
 import { errorHandler } from '@/middleware/errorHandler';
 import { expressWinstonLogger } from './config/logger';
 import { morganHttpLogger } from '@/config/morgan';
 import { notFound } from '@/middleware/notFound';
+import { rateLimiter } from '@/middleware/rateLimiter';
 import { transformErrorToAPIError } from '@/middleware/transformErrorToAPIError';
 import cors from 'cors';
 import express from 'express';
@@ -22,6 +24,11 @@ app.use(xssClean());
 
 // Sanitize request data
 app.use(mongoSanitize());
+
+// Basic rate-limiting middleware
+if (env.NODE_ENV === 'production') {
+  app.use(rateLimiter);
+}
 
 if (env.NODE_ENV === 'development') {
   // HTTP request logger middleware
@@ -44,6 +51,11 @@ app.options('*', cors);
 
 // Express-winston logger makes sense BEFORE the router
 app.use(expressWinstonLogger.info);
+
+// Limit repeated failed requests to auth endpoints
+if (env.NODE_ENV === 'production') {
+  app.use('/v1/auth', authLimiter);
+}
 
 // v1 api routes
 app.use('/api/v1', routes);
