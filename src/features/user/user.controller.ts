@@ -122,7 +122,7 @@ const update = catchAsync(
       userId !== authenticatedUser._id?.toString()
       && authenticatedUser.role !== UserRole.ADMIN
     ) {
-      return new ApiError({
+      throw new ApiError({
         statusCode: httpStatus.FORBIDDEN,
         message: 'You are not allowed to update this user',
         isOperational: false,
@@ -155,7 +155,7 @@ const update = catchAsync(
     );
 
     if (!updatedUser) {
-      return new ApiError({
+      throw new ApiError({
         statusCode: httpStatus.NOT_FOUND,
         message: 'User not found',
         isOperational: false,
@@ -177,20 +177,34 @@ const update = catchAsync(
 const remove = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const { userId } = req.params;
+    const authenticatedUser = req.authenticatedUser!;
 
-    const user = await User.findByIdAndDelete(userId);
-
-    if (!user) {
-      return new ApiError({
-        statusCode: httpStatus.NOT_FOUND,
-        message: 'User not found',
+    if (
+      userId !== authenticatedUser._id?.toString()
+      && authenticatedUser.role !== UserRole.ADMIN
+    ) {
+      throw new ApiError({
+        statusCode: httpStatus.FORBIDDEN,
+        message: 'You are not allowed to delete this user',
         isOperational: false,
       });
     }
 
-    res.status(httpStatus.NO_CONTENT).json({
-      status: httpStatus.NO_CONTENT,
+    const userToDelete = await User.findById(userId);
+
+    if (!userToDelete) {
+      return res.status(httpStatus.NOT_FOUND).json({
+        status: httpStatus.NOT_FOUND,
+        message: 'User not found',
+      });
+    }
+
+    const removedUser = await User.findByIdAndDelete(userId);
+
+    res.status(httpStatus.ACCEPTED).json({
+      status: httpStatus.ACCEPTED,
       message: 'User deleted successfully',
+      removedUser,
     });
   },
 );
