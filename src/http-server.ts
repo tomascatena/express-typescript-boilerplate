@@ -17,6 +17,10 @@ export const server = app.listen(env.PORT, () => {
   }
 });
 
+/**
+ * Handle Node process termination.
+ */
+
 process.on('unhandledRejection', unhandledRejectionHandler);
 
 process.on('uncaughtException', uncaughtExceptionHandler);

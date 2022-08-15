@@ -18,7 +18,8 @@ const logError = (err: Error | mongoose.Error) => {
 };
 
 /**
- * Connect to mongoDB using mongoose
+ * @config
+ * @description - Connect to mongoDB using mongoose.
  */
 export const connectDB = async () => {
   try {

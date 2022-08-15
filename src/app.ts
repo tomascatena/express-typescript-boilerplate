@@ -14,7 +14,14 @@ import mongoSanitize from 'express-mongo-sanitize';
 import routes from '@/routes/v1';
 import xssClean from 'xss-clean';
 
+/**
+ * Express application.
+ */
 export const app = express();
+
+/**
+ * Set up middlewares
+ */
 
 // Secure Express app by setting various HTTP headers
 app.use(helmet());

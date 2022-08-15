@@ -8,7 +8,7 @@ import httpStatus from 'http-status-codes';
  * @desc     Authenticate user & get token
  * @access   Private
  */
-const loginUser = catchAsync(
+const login = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     res.status(httpStatus.OK).json({ message: 'Successfully logged in' });
   },
@@ -26,6 +26,6 @@ const getUser = catchAsync(
 );
 
 export default {
-  loginUser,
+  login,
   getUser,
 };

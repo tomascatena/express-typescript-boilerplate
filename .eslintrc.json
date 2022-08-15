@@ -2,14 +2,14 @@
   "env": {
     "node": true
   },
-  "ignorePatterns": [
-    "dist/*"
-  ],
   "extends": [
     "airbnb-typescript",
     "airbnb-base",
     "airbnb-typescript/base",
     "plugin:security/recommended"
+  ],
+  "ignorePatterns": [
+    "dist/*"
   ],
   "parserOptions": {
     "ecmaVersion": 2021,
@@ -25,6 +25,16 @@
       "always",
       {
         "exceptAfterSingleLine": true
+      }
+    ],
+    "@typescript-eslint/naming-convention": [
+      "warn",
+      {
+        "format": [
+          "camelCase",
+          "PascalCase"
+        ],
+        "selector": "variable"
       }
     ],
     "@typescript-eslint/no-unused-vars": [
