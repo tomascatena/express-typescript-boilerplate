@@ -1,5 +1,9 @@
+import { getAllUsers } from './getAllUsers.swagger';
 import { register } from './register.swagger';
 
 export default {
-  ...register,
+  '/users': {
+    ...register,
+    ...getAllUsers,
+  },
 };

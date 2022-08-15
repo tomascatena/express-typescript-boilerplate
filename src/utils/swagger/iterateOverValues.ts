@@ -27,6 +27,7 @@ export const iterateOverValues = (values: GeneralObject, result: GeneralObject) 
     responseBody.type = 'object';
     responseBody.properties = properties;
   }
+
   if (isArray(values)) {
     responseBody.type = 'array';
     responseBody.items = iterateOverValues(values[0], result);

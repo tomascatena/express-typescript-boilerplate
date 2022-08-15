@@ -56,17 +56,15 @@ const emailTakenResponse = getSwaggerResponseBodySchema({
 });
 
 export const register = {
-  '/users/': {
-    post: {
-      tags: ['Users'],
-      summary: 'Register user',
-      description: 'Register a new user',
-      requestBody: registerUserRequestBody,
-      responses: {
-        [StatusCodes.OK]: successResponse,
-        [StatusCodes.BAD_REQUEST]: validationErrorResponse,
-        [StatusCodes.CONFLICT]: emailTakenResponse,
-      },
+  post: {
+    tags: ['Users'],
+    summary: 'Register user',
+    description: 'Register a new user',
+    requestBody: registerUserRequestBody,
+    responses: {
+      [StatusCodes.OK]: successResponse,
+      [StatusCodes.BAD_REQUEST]: validationErrorResponse,
+      [StatusCodes.CONFLICT]: emailTakenResponse,
     },
   },
 };

@@ -28,10 +28,11 @@ const supportedSubmitMethods = env.NODE_ENV === 'development'
 
 const options: swaggerUi.SwaggerOptions = {
   swaggerOptions: {
-    explorer: true,
     tryItOutEnabled: env.NODE_ENV === 'development',
     supportedSubmitMethods,
   },
+  explorer: true,
+  customSiteTitle: 'API Documentation',
 };
 
 router.use(
@@ -41,7 +42,7 @@ router.use(
 
 router.get(
   '/',
-  swaggerUi.setup(swaggerDocumentation, options),
+  swaggerUi.setup(swaggerDocumentation, options, { docExpansion: false }),
 );
 
 export default router;
