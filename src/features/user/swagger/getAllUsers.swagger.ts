@@ -1,12 +1,30 @@
 import { StatusCodes } from 'http-status-codes';
-import { getSwaggerRequestBodySchema } from '@/utils/swagger/getSwaggerRequestBodySchema';
 import { getSwaggerResponseBodySchema } from '@/utils/swagger/getSwaggerResponseBodySchema';
 
-const getAllUsersRequestBody = getSwaggerRequestBodySchema({
-  isRequired: true,
-  requiredFields: [],
-  requestBody: {},
-});
+const queryParameters = [
+  {
+    in: 'query',
+    name: 'limit',
+    description: 'Amount of users to return',
+    required: false,
+    schema: {
+      type: 'integer',
+      minimum: 0,
+      default: 5,
+    },
+  },
+  {
+    in: 'query',
+    name: 'from',
+    description: 'Amount of users to skip from the beginning',
+    required: false,
+    schema: {
+      type: 'integer',
+      minimum: 0,
+      default: 0,
+    },
+  },
+];
 
 const successResponse = getSwaggerResponseBodySchema({
   description: 'Get all users paginated and filtered',
@@ -30,7 +48,7 @@ export const getAllUsers = {
     tags: ['Users'],
     summary: 'Get all users paginated and filtered',
     description: 'Get all users paginated and filtered, with query params: limit, from',
-    requestBody: getAllUsersRequestBody,
+    parameters: queryParameters,
     responses: {
       [StatusCodes.OK]: successResponse,
     },

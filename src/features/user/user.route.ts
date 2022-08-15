@@ -1,9 +1,7 @@
-import { check, param, query } from 'express-validator';
-import { isRoleValid } from './helpers/isRoleValid';
 import { requireJWTAuth } from '@/middleware/requireJWTAuth';
-import { validationsResults } from '@/middleware/validationsResults';
 import express from 'express';
 import userController from './user.controller';
+import userValidations from './user.validations';
 
 const router = express.Router();
 
@@ -14,15 +12,7 @@ const router = express.Router();
  */
 router.get(
   '/',
-  [
-    query('limit')
-      .optional()
-      .isInt({ min: 0 }),
-    query('from')
-      .optional()
-      .isInt({ min: 0 }),
-    validationsResults(),
-  ],
+  userValidations.getAllUsers,
   userController.getAllUsers,
 );
 
@@ -32,7 +22,7 @@ router.get(
  * @access   Public
  */
 router.get(
-  '/',
+  '/:userId',
   userController.getUser,
 );
 
@@ -43,27 +33,7 @@ router.get(
  */
 router.post(
   '/',
-  [
-    check('username', 'Username is required')
-      .trim()
-      .notEmpty()
-      .isLength({ min: 2, max: 30 })
-      .withMessage('Username must be between 2 and 30 characters'),
-    check('email', 'Email is required')
-      .trim()
-      .notEmpty()
-      .isEmail()
-      .withMessage('Email is invalid'),
-    check('password', 'Password is required')
-      .trim()
-      .notEmpty()
-      .isLength({ min: 6 })
-      .withMessage('Password must be at least 6 characters long'),
-    check('role')
-      .optional({ checkFalsy: true, nullable: true })
-      .custom(isRoleValid),
-    validationsResults(),
-  ],
+  userValidations.register,
   userController.register,
 );
 
@@ -75,40 +45,7 @@ router.post(
 router.put(
   '/:userId',
   requireJWTAuth,
-  [
-    param('userId', 'User ID is required')
-      .isMongoId()
-      .withMessage('User ID is invalid'),
-    check('username')
-      .optional({ checkFalsy: true, nullable: true })
-      .trim()
-      .notEmpty()
-      .isLength({ min: 2, max: 30 })
-      .withMessage('Username must be between 2 and 30 characters'),
-    check('email')
-      .optional({ checkFalsy: true, nullable: true })
-      .trim()
-      .notEmpty()
-      .isEmail()
-      .withMessage('Email is invalid'),
-    check('password', 'Password is required')
-      .optional({ checkFalsy: true, nullable: true })
-      .trim()
-      .notEmpty()
-      .isLength({ min: 6 })
-      .withMessage('Password must be at least 6 characters long'),
-    check('profileImage')
-      .optional({ checkFalsy: true, nullable: true })
-      .trim()
-      .notEmpty()
-      .isString()
-      .isLength({ max: 2048 })
-      .withMessage('Profile image is invalid'),
-    check('role')
-      .optional({ checkFalsy: true, nullable: true })
-      .custom(isRoleValid),
-    validationsResults(),
-  ],
+  userValidations.update,
   userController.update,
 );
 
@@ -118,14 +55,9 @@ router.put(
  * @access  Private
  */
 router.delete(
-  '/',
+  '/:userId',
   requireJWTAuth,
-  [
-    param('userId', 'User ID is required')
-      .isMongoId()
-      .withMessage('User ID is invalid'),
-    validationsResults(),
-  ],
+  userValidations.remove,
   userController.remove,
 );
 
