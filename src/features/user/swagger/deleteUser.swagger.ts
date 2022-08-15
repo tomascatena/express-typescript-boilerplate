@@ -64,6 +64,7 @@ export const deleteUser = {
     summary: 'Delete user',
     description: 'Delete a by user id',
     parameters: pathParameters,
+    security: [{ bearerAuth: [] }],
     responses: {
       [StatusCodes.ACCEPTED]: successResponse,
       [StatusCodes.BAD_REQUEST]: validationErrorResponse,

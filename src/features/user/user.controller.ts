@@ -22,7 +22,7 @@ const getAllUsers = catchAsync(
     const usersQuery = { isActive: true };
 
     const [users, totalActiveUsers] = await Promise.all([
-      User.find(usersQuery).limit(Number(limit)).skip(Number(from)), //
+      User.find(usersQuery).limit(Number(limit)).skip(Number(from)),
       User.countDocuments(usersQuery),
     ]);
 
@@ -109,15 +109,6 @@ const update = catchAsync(
     const { userId } = req.params;
     const authenticatedUser = req.authenticatedUser!;
 
-    const userToUpdate = await User.findById(userId);
-
-    if (!userToUpdate) {
-      return res.status(httpStatus.NOT_FOUND).json({
-        status: httpStatus.NOT_FOUND,
-        message: 'User not found',
-      });
-    }
-
     if (
       userId !== authenticatedUser._id?.toString()
       && authenticatedUser.role !== UserRole.ADMIN
@@ -126,6 +117,15 @@ const update = catchAsync(
         statusCode: httpStatus.FORBIDDEN,
         message: 'You are not allowed to update this user',
         isOperational: false,
+      });
+    }
+
+    const userToUpdate = await User.findById(userId);
+
+    if (!userToUpdate) {
+      return res.status(httpStatus.NOT_FOUND).json({
+        status: httpStatus.NOT_FOUND,
+        message: 'User not found',
       });
     }
 
