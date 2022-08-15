@@ -1,4 +1,4 @@
-import { UserRole } from '@/config/roles';
+import { Roles } from '@/config/roles';
 import bcryptjs from 'bcryptjs';
 import mongoose from 'mongoose';
 
@@ -9,7 +9,7 @@ export interface IUser {
   email: string;
   password: string;
   profileImage: string;
-  role: UserRole;
+  role: Roles;
   isActive: boolean;
   createdByGoogle: boolean;
   isEmailVerified: boolean;
@@ -47,7 +47,6 @@ const userSchema = new mongoose.Schema<IUser, IUserModel>(
     role: {
       type: String,
       required: true,
-      enum: UserRole,
     },
     isActive: {
       type: Boolean,
@@ -66,18 +65,6 @@ const userSchema = new mongoose.Schema<IUser, IUserModel>(
     timestamps: true,
   },
 );
-
-userSchema.statics.isEmailTaken = async function (
-  email: string,
-  excludeUserId: string | undefined = undefined,
-): Promise<boolean> {
-  const user = await this.findOne({
-    email: email.toLowerCase(),
-    _id: { $ne: excludeUserId },
-  });
-
-  return Boolean(user);
-};
 
 userSchema.statics.isUsernameTaken = async function (username: string) {
   const user = await this.findOne({ username });
@@ -102,6 +89,8 @@ userSchema.methods.isPasswordMatch = async function (password: string) {
 };
 
 userSchema.pre('save', async function (next) {
+  console.log('pre save');
+
   if (!this.isModified('password')) {
     next();
   }
