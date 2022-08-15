@@ -75,7 +75,7 @@ const register = catchAsync(
     const { username, email, password } = req.body;
 
     if (await User.isEmailTaken(email!)) {
-      res.status(httpStatus.CONFLICT).json({
+      return res.status(httpStatus.CONFLICT).json({
         status: httpStatus.CONFLICT,
         message: 'Email is already taken',
       });
@@ -106,8 +106,28 @@ const register = catchAsync(
  */
 const update = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    console.log('update');
     const { userId } = req.params;
+    const authenticatedUser = req.authenticatedUser!;
+
+    const userToUpdate = await User.findById(userId);
+
+    if (!userToUpdate) {
+      return res.status(httpStatus.NOT_FOUND).json({
+        status: httpStatus.NOT_FOUND,
+        message: 'User not found',
+      });
+    }
+
+    if (
+      userId !== authenticatedUser._id?.toString()
+      && authenticatedUser.role !== UserRole.ADMIN
+    ) {
+      return new ApiError({
+        statusCode: httpStatus.FORBIDDEN,
+        message: 'You are not allowed to update this user',
+        isOperational: false,
+      });
+    }
 
     const {
       password,
@@ -117,13 +137,13 @@ const update = catchAsync(
     } = req.body;
 
     if (!password && !username && !email && !profileImage) {
-      res.status(httpStatus.NO_CONTENT).json({
-        status: httpStatus.NO_CONTENT,
+      return res.status(httpStatus.OK).json({
+        status: httpStatus.OK,
         message: 'No fields to update',
       });
     }
 
-    const user = await User.findByIdAndUpdate(
+    const updatedUser = await User.findByIdAndUpdate(
       userId,
       {
         ...(password && { password }),
@@ -134,7 +154,7 @@ const update = catchAsync(
       { new: true },
     );
 
-    if (!user) {
+    if (!updatedUser) {
       return new ApiError({
         statusCode: httpStatus.NOT_FOUND,
         message: 'User not found',
@@ -144,7 +164,7 @@ const update = catchAsync(
 
     res.status(200).json({
       message: 'User updated successfully',
-      user: user.toJSON(),
+      user: updatedUser.toJSON(),
     });
   },
 );

@@ -2,35 +2,30 @@ import { StatusCodes } from 'http-status-codes';
 import { getSwaggerRequestBodySchema } from '@/utils/swagger/getSwaggerRequestBodySchema';
 import { getSwaggerResponseBodySchema } from '@/utils/swagger/getSwaggerResponseBodySchema';
 
-const loginUserRequestBody = getSwaggerRequestBodySchema({
+const registerUserRequestBody = getSwaggerRequestBodySchema({
   isRequired: true,
-  requiredFields: ['email', 'password'],
+  requiredFields: ['username', 'email', 'password', 'confirmPassword'],
   requestBody: {
-    email: 'pelusa@gmail.com',
+    username: 'Tomas',
+    email: 'tomas@email.com',
     password: 'abc123',
+    confirmPassword: 'abc123',
   },
 });
 
 const successResponse = getSwaggerResponseBodySchema({
   description: 'Login existing user',
   responseBody: {
-    message: 'Successfully logged in',
-    tokens: {
-      access: {
-        token:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MmFiMTYxY2U4YzRmMGU0MjhhZGVhZWQiLCJpYXQiOjE2NTU2NDI3MDIsImV4cCI6MTY1NTcyOTEwMiwidHlwZSI6ImFjY2VzcyJ9.bdUCfq_wrKCsw4682R_PQq3Bgt3N54xugMHQNKU3wvU',
-        expires: '2022-06-20T12:45:02.512Z',
-      },
-      refresh: {
-        token:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MmFiMTYxY2U4YzRmMGU0MjhhZGVhZWQiLCJpYXQiOjE2NTU2NDI3MDIsImV4cCI6MTY1ODIzNDcwMiwidHlwZSI6InJlZnJlc2gifQ.ox6d4MD4SEnNZT0DVYQRWr-iCd4GmOhCZ2Gsl_wgf4g',
-        expires: '2022-07-19T12:45:02.512Z',
-      },
-    },
+    status: 201,
+    message: 'User created successfully',
     user: {
-      username: 'Pelusa',
-      _id: '62ab161ce8c4f0e428adeaed',
+      username: 'Tomas',
+      email: 'tomas@email.com',
+      role: 'USER_ROLE',
+      isEmailVerified: false,
+      uid: '62fa405764fc84fb2b4cd5a9',
     },
+    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjJmYTQwNTc2NGZjODRmYjJiNGNkNWE5IiwiaWF0IjoxNjYwNTY3NjM5LCJleHAiOjE2NjExNzI0Mzl9.Um8xkjVPpxsy83B1bqMG1MQNgZJVNKZB1jhSKTRuhHM',
   },
 });
 
@@ -43,12 +38,20 @@ const validationErrorResponse = getSwaggerResponseBodySchema({
         path: ['email'],
         type: 'string.email',
         context: {
-          invalids: ['pelusagmail.com'],
+          invalids: ['usernamegmail.com'],
           label: 'email',
           key: 'email',
         },
       },
     ],
+  },
+});
+
+const emailTakenResponse = getSwaggerResponseBodySchema({
+  description: 'Validation error on email or password',
+  responseBody: {
+    status: 409,
+    message: 'Email is already taken',
   },
 });
 
@@ -58,10 +61,11 @@ export const register = {
       tags: ['Users'],
       summary: 'Register user',
       description: 'Register a new user',
-      requestBody: loginUserRequestBody,
+      requestBody: registerUserRequestBody,
       responses: {
         [StatusCodes.OK]: successResponse,
         [StatusCodes.BAD_REQUEST]: validationErrorResponse,
+        [StatusCodes.CONFLICT]: emailTakenResponse,
       },
     },
   },

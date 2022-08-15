@@ -4,6 +4,7 @@ import authPaths from '@/features/auth/swagger/auth.swagger.paths';
 import express from 'express';
 import swaggerDefinition from './swaggerDef';
 import swaggerUi from 'swagger-ui-express';
+import userPaths from '@/features/user/swagger/users.swagger.paths';
 
 const router = express.Router();
 
@@ -11,6 +12,7 @@ const swaggerDocumentation: swaggerUi.JsonObject = {
   ...swaggerDefinition,
   paths: {
     ...authPaths,
+    ...userPaths,
   },
   components: {
     schemas: {},

@@ -107,6 +107,7 @@ userSchema.methods.toJSON = function () {
     createdAt,
     createdByGoogle,
     isActive,
+    isEmailVerified,
     password,
     updatedAt,
     ...user

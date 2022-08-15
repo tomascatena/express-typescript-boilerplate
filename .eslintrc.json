@@ -32,7 +32,8 @@
       {
         "format": [
           "camelCase",
-          "PascalCase"
+          "PascalCase",
+          "UPPER_CASE"
         ],
         "selector": "variable"
       }

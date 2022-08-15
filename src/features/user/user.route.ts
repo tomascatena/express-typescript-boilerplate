@@ -1,5 +1,6 @@
 import { check, param, query } from 'express-validator';
 import { isRoleValid } from './helpers/isRoleValid';
+import { requireJWTAuth } from '@/middleware/requireJWTAuth';
 import { validationsResults } from '@/middleware/validationsResults';
 import express from 'express';
 import userController from './user.controller';
@@ -28,6 +29,16 @@ router.get(
 /**
  * @route    GET api/v1/users/:userId
  * @desc     Get a user by id
+ * @access   Public
+ */
+router.get(
+  '/',
+  userController.getUser,
+);
+
+/**
+ * @route    POST api/v1/users
+ * @desc     Create a user
  * @access   Public
  */
 router.post(
@@ -63,6 +74,7 @@ router.post(
  */
 router.put(
   '/:userId',
+  requireJWTAuth,
   [
     param('userId', 'User ID is required')
       .isMongoId()
@@ -107,6 +119,7 @@ router.put(
  */
 router.delete(
   '/',
+  requireJWTAuth,
   [
     param('userId', 'User ID is required')
       .isMongoId()
