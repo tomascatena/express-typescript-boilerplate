@@ -60,6 +60,8 @@ export const register = {
     tags: ['Users'],
     summary: 'Register user',
     description: 'Register a new user',
+    consumes: ['application/json'],
+    produces: ['application/json'],
     requestBody: registerUserRequestBody,
     responses: {
       [StatusCodes.OK]: successResponse,

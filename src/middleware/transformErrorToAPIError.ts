@@ -21,7 +21,7 @@ export const transformErrorToAPIError = (
 
   if (!(error instanceof ApiError)) {
     const statusCode = error.statusCode || error instanceof mongoose.Error
-      ? httpStatus.BAD_REQUEST
+      ? error.statusCode
       : httpStatus.INTERNAL_SERVER_ERROR;
 
     const message = error.message || ReasonPhrases.INTERNAL_SERVER_ERROR;

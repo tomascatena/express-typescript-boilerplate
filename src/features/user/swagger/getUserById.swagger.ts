@@ -27,6 +27,7 @@ export const getUserById = {
     tags: ['Users'],
     summary: 'Get user by user ID',
     description: 'Get user by user ID',
+    produces: ['application/json'],
     requestBody: getUserByIdRequestBody,
     responses: {
       [StatusCodes.OK]: successResponse,

@@ -109,6 +109,9 @@ const update = catchAsync(
     const { userId } = req.params;
     const authenticatedUser = req.authenticatedUser!;
 
+    console.log(authenticatedUser);
+    console.log(userId);
+
     if (
       userId !== authenticatedUser._id?.toString()
       && authenticatedUser.role !== UserRole.ADMIN
@@ -120,15 +123,6 @@ const update = catchAsync(
       });
     }
 
-    const userToUpdate = await User.findById(userId);
-
-    if (!userToUpdate) {
-      return res.status(httpStatus.NOT_FOUND).json({
-        status: httpStatus.NOT_FOUND,
-        message: 'User not found',
-      });
-    }
-
     const {
       password,
       username,
@@ -137,8 +131,8 @@ const update = catchAsync(
     } = req.body;
 
     if (!password && !username && !email && !profileImage) {
-      return res.status(httpStatus.OK).json({
-        status: httpStatus.OK,
+      return res.status(httpStatus.ACCEPTED).json({
+        status: httpStatus.ACCEPTED,
         message: 'No fields to update',
       });
     }
@@ -190,21 +184,19 @@ const remove = catchAsync(
       });
     }
 
-    const userToDelete = await User.findById(userId);
+    const removedUser = await User.findByIdAndDelete(userId);
 
-    if (!userToDelete) {
+    if (!removedUser) {
       return res.status(httpStatus.NOT_FOUND).json({
         status: httpStatus.NOT_FOUND,
         message: 'User not found',
       });
     }
 
-    const removedUser = await User.findByIdAndDelete(userId);
-
     res.status(httpStatus.ACCEPTED).json({
       status: httpStatus.ACCEPTED,
       message: 'User deleted successfully',
-      removedUser,
+      removedUser: removedUser.toJSON(),
     });
   },
 );

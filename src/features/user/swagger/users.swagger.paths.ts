@@ -2,6 +2,7 @@ import { deleteUser } from './deleteUser.swagger';
 import { getAllUsers } from './getAllUsers.swagger';
 import { getUserById } from './getUserById.swagger';
 import { register } from './register.swagger';
+import { updateUser } from './updateUser.swagger';
 
 export default {
   '/users': {
@@ -11,5 +12,6 @@ export default {
   },
   '/users/:userId': {
     ...getUserById,
+    ...updateUser,
   },
 };

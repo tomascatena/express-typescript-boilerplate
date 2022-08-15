@@ -48,6 +48,7 @@ export const getAllUsers = {
     tags: ['Users'],
     summary: 'Get all users paginated and filtered',
     description: 'Get all users paginated and filtered, with query params: limit, from',
+    produces: ['application/json'],
     parameters: queryParameters,
     responses: {
       [StatusCodes.OK]: successResponse,

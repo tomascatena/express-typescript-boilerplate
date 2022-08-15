@@ -22,18 +22,16 @@ const tokenExpiredErrorResponse = getSwaggerResponseBodySchema({
 });
 
 export const getMe = {
-  '/auth/me': {
-    get: {
-      tags: ['Auth'],
-      summary: 'Get logged in user',
-      description: 'Gets information about the currently logged in user',
-      consumes: ['application/json'],
-      produces: ['application/json'],
-      security: [{ bearerAuth: [] }],
-      responses: {
-        [StatusCodes.OK]: successResponse,
-        [StatusCodes.UNAUTHORIZED]: tokenExpiredErrorResponse,
-      },
+  get: {
+    tags: ['Auth'],
+    summary: 'Get logged in user',
+    description: 'Gets information about the currently logged in user',
+    consumes: ['application/json'],
+    produces: ['application/json'],
+    security: [{ bearerAuth: [] }],
+    responses: {
+      [StatusCodes.OK]: successResponse,
+      [StatusCodes.UNAUTHORIZED]: tokenExpiredErrorResponse,
     },
   },
 };

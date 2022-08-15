@@ -63,6 +63,7 @@ export const deleteUser = {
     tags: ['Users'],
     summary: 'Delete user',
     description: 'Delete a by user id',
+    produces: ['application/json'],
     parameters: pathParameters,
     security: [{ bearerAuth: [] }],
     responses: {

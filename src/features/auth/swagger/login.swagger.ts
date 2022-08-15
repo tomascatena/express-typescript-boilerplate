@@ -61,17 +61,15 @@ const validationErrorResponse = getSwaggerResponseBodySchema({
 });
 
 export const login = {
-  '/auth/login': {
-    post: {
-      tags: ['Auth'],
-      summary: 'Login user',
-      description: 'Logs in existing user',
-      requestBody: loginUserRequestBody,
-      responses: {
-        [StatusCodes.OK]: successResponse,
-        [StatusCodes.UNAUTHORIZED]: unauthorizedResponse,
-        [StatusCodes.BAD_REQUEST]: validationErrorResponse,
-      },
+  post: {
+    tags: ['Auth'],
+    summary: 'Login user',
+    description: 'Logs in existing user',
+    requestBody: loginUserRequestBody,
+    responses: {
+      [StatusCodes.OK]: successResponse,
+      [StatusCodes.UNAUTHORIZED]: unauthorizedResponse,
+      [StatusCodes.BAD_REQUEST]: validationErrorResponse,
     },
   },
 };

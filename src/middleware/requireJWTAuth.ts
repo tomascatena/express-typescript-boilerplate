@@ -45,12 +45,7 @@ export const requireJWTAuth = [
       req.authenticatedUserId = authenticatedUserId;
       req.authenticatedUser = authenticatedUser;
     } catch (error) {
-      throw new ApiError({
-        statusCode: httpStatus.UNAUTHORIZED,
-        message: 'Not authorized to access this endpoint',
-        isOperational: false,
-        stack: error instanceof Error ? error.stack : undefined,
-      });
+      next(error);
     }
 
     next();
