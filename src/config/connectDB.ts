@@ -6,9 +6,7 @@ import { env } from './env';
 import mongoose from 'mongoose';
 
 const logError = (err: Error | mongoose.Error) => {
-  Logger.error(
-    `Something went wrong when connecting to mongoDB: ${err.message}`,
-  );
+  Logger.error(`Something went wrong when connecting to mongoDB: ${err.message}`);
 
   LoggerToFile.error({
     name: err.name,

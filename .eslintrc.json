@@ -17,7 +17,8 @@
   },
   "plugins": [
     "security",
-    "sort-imports-es6-autofix"
+    "sort-imports-es6-autofix",
+    "eslint-plugin-jest"
   ],
   "rules": {
     "@typescript-eslint/lines-between-class-members": [
