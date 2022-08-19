@@ -8,7 +8,7 @@ export interface IUser {
   username: string;
   email: string;
   password: string;
-  profileImage: string;
+  profileImage?: string;
   role: Roles;
   isActive: boolean;
   createdByGoogle: boolean;
@@ -89,8 +89,6 @@ userSchema.methods.isPasswordMatch = async function (password: string) {
 };
 
 userSchema.pre('save', async function (next) {
-  console.log('pre save');
-
   if (!this.isModified('password')) {
     next();
   }

@@ -23,6 +23,7 @@ router.get(
  */
 router.get(
   '/:userId',
+  userValidations.getUserById,
   userController.getUser,
 );
 

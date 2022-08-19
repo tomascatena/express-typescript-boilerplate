@@ -12,9 +12,7 @@ import { unhandledRejectionHandler } from '@/utils/nodeHandlers/unhandledRejecti
 export const server = app.listen(env.PORT, () => {
   Logger.info(`HTTP Server listening on port ${env.PORT}`);
 
-  if (env.NODE_ENV !== 'test') {
-    connectDB();
-  }
+  connectDB();
 });
 
 /**

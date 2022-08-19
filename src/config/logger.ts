@@ -22,18 +22,12 @@ const CUSTOM_LEVELS = {
 
 winston.addColors(CUSTOM_LEVELS.colors);
 
-/**
- * @description - Returns the format for the winston logger to be used when writing to the file.
- */
 const formatToFile = winston.format.combine(
   winston.format.uncolorize(),
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
   winston.format.json(),
 );
 
-/**
- * @description - Returns the format for the winston logger to be used when writing to the console.
- */
 const formatToConsole = winston.format.combine(
   winston.format.colorize({ all: true }),
   winston.format.prettyPrint(),
@@ -46,17 +40,11 @@ const formatToConsole = winston.format.combine(
   ),
 );
 
-/**
- * @description - Configure the file name and logger level for the errors.
- */
 const DailyRotateFileForErrors = new winston.transports.DailyRotateFile({
   filename: 'logs/error/error-%DATE%.log',
   level: 'error',
 });
 
-/**
- * @description - Configure the file name and logger level for the info messages.
- */
 const DailyRotateFileForInfo = new winston.transports.DailyRotateFile({
   filename: 'logs/activity/activity-%DATE%.log',
   level: 'info',
@@ -69,9 +57,10 @@ const DailyRotateFileForInfo = new winston.transports.DailyRotateFile({
 export const Logger = winston.createLogger({
   exitOnError: false,
   levels: CUSTOM_LEVELS.levels,
-  level: env.NODE_ENV === 'development' ? 'debug' : 'warn',
+  level: 'debug',
   format: formatToConsole,
   transports: [new winston.transports.Console()],
+  silent: env.NODE_ENV === 'test',
 });
 
 /**
@@ -83,6 +72,7 @@ export const LoggerToFile = winston.createLogger({
   levels: CUSTOM_LEVELS.levels,
   format: formatToFile,
   transports: [DailyRotateFileForErrors],
+  silent: env.NODE_ENV === 'test',
 });
 
 /**

@@ -20,5 +20,6 @@ export const env = cleanEnv(process.env, {
   }),
   PORT: port({ desc: 'API Port' }),
   MONGODB_URI: url({ desc: 'Mongo DB url' }),
+  MONGODB_TEST_URI: url({ desc: 'Mongo DB url for Test Database' }),
   JWT_SECRET: str({ desc: 'JWT Secret' }),
 });

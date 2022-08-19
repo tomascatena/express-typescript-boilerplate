@@ -12,6 +12,13 @@ const getAllUsers = [
   validationsResults(),
 ];
 
+const getUserById = [
+  param('userId', 'User ID is required')
+    .isMongoId()
+    .withMessage('User ID is invalid'),
+  validationsResults(),
+];
+
 const register = [
   check('username', 'Username is required')
     .trim()
@@ -78,6 +85,7 @@ const remove = [
 
 export default {
   getAllUsers,
+  getUserById,
   register,
   update,
   remove,
