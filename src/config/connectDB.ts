@@ -22,11 +22,14 @@ const DB_URI = env.NODE_ENV === 'test' ? env.MONGODB_TEST_URI : env.MONGODB_URI;
  * @description - Connect to mongoDB using mongoose.
  */
 export const connectDB = async () => {
+  Logger.info('Connecting to mongoDB');
+
   try {
     const conn = await mongoose.connect(DB_URI);
 
-    Logger.info(`Connected to mongoDB: ${conn.connection.host}:${conn.connection.port}`);
-    Logger.info(`Database Name: ${conn.connection.db.databaseName}`);
+    Logger.info('Connected to mongoDB:');
+    Logger.info(`   - URL: ${conn.connection.host}:${conn.connection.port}`);
+    Logger.info(`   - Database Name: ${conn.connection.db.databaseName}`);
   } catch (error) {
     console.log(error);
     if (error instanceof Error || error instanceof mongoose.Error) {

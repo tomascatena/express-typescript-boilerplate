@@ -14,6 +14,7 @@ dotenv.config({ path: path.join(__dirname, '../../.env') });
  * @description - Returns a sanitized, immutable environment object.
  */
 export const env = cleanEnv(process.env, {
+  APP_NAME: str(),
   NODE_ENV: str({
     choices: ['development', 'test', 'production', 'staging'],
     desc: 'Node environment',

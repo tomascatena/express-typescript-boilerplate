@@ -1,6 +1,7 @@
+import 'colors';
 import 'winston-daily-rotate-file';
 import { env } from './env';
-import expressWinston from 'express-winston';
+import process from 'process';
 import winston from 'winston';
 
 const CUSTOM_LEVELS = {
@@ -22,30 +23,28 @@ const CUSTOM_LEVELS = {
 
 winston.addColors(CUSTOM_LEVELS.colors);
 
-const formatToFile = winston.format.combine(
+export const formatToFile = winston.format.combine(
   winston.format.uncolorize(),
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
   winston.format.json(),
 );
 
 const formatToConsole = winston.format.combine(
-  winston.format.colorize({ all: true }),
+  winston.format.colorize({ all: false }),
   winston.format.prettyPrint(),
-  winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
-  winston.format.label({
-    label: '[LOGGER]',
-  }),
+  winston.format.timestamp({ format: 'DD/MM/YYYY HH:mm:ss' }),
+  winston.format.label({ label: `[${env.APP_NAME}] ${process.pid}  -` }),
   winston.format.printf(
-    (info) => ` ${info.label}  ${info.timestamp}  ${info.level} : ${info.message}`,
+    (info) => `${info.label.green} ${info.timestamp.yellow}  ${info.level} : ${info.message.green}`,
   ),
 );
 
-const DailyRotateFileForErrors = new winston.transports.DailyRotateFile({
+export const DailyRotateFileForErrors = new winston.transports.DailyRotateFile({
   filename: 'logs/error/error-%DATE%.log',
   level: 'error',
 });
 
-const DailyRotateFileForInfo = new winston.transports.DailyRotateFile({
+export const DailyRotateFileForInfo = new winston.transports.DailyRotateFile({
   filename: 'logs/activity/activity-%DATE%.log',
   level: 'info',
 });
@@ -74,18 +73,3 @@ export const LoggerToFile = winston.createLogger({
   transports: [DailyRotateFileForErrors],
   silent: env.NODE_ENV === 'test',
 });
-
-/**
- * @middleware
- * @description - Custom winston logger middleware.
- */
-export const expressWinstonLogger = {
-  info: expressWinston.logger({
-    format: formatToFile,
-    transports: [DailyRotateFileForInfo],
-  }),
-  error: expressWinston.logger({
-    format: formatToFile,
-    transports: [DailyRotateFileForErrors],
-  }),
-};

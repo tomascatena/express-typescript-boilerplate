@@ -1,6 +1,6 @@
 import { Server } from 'http';
-import { UserRole } from '../../config/roles';
-import User from './User.model';
+import { UserRole } from '@/config/roles';
+import User from '../User.model';
 import mongoose from 'mongoose';
 import request from 'supertest';
 
@@ -45,7 +45,11 @@ describe('Users routes', () => {
       const res = await request(server).get('/api/v1/users');
 
       expect(res.status).toBe(200);
+
       expect(res.body.users.length).toBe(2);
+      expect(res.body.message).toBe('Users retrieved successfully');
+      expect(res.body.status).toBe(200);
+      expect(res.body.totalUsers).toBe(2);
     });
   });
 

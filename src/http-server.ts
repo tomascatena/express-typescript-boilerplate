@@ -6,21 +6,16 @@ import { env } from '@/config/env';
 import { uncaughtExceptionHandler } from '@/utils/nodeHandlers/uncaughtExceptionHandler';
 import { unhandledRejectionHandler } from '@/utils/nodeHandlers/unhandledRejectionHandler';
 
-/**
- * The main function. Express http server.
- */
-export const server = app.listen(env.PORT, () => {
-  Logger.info(`HTTP Server listening on port ${env.PORT}`);
+const main = async () => {
+  Logger.info(`Starting ${env.APP_NAME} on port ${env.PORT}`);
 
-  connectDB();
-});
+  await connectDB();
 
-/**
- * Handle Node process termination.
- */
+  Logger.info(`${env.APP_NAME} is running on port ${env.PORT}`);
+};
+
+export const server = app.listen(env.PORT, main);
 
 process.on('unhandledRejection', unhandledRejectionHandler);
-
 process.on('uncaughtException', uncaughtExceptionHandler);
-
 process.on('SIGTERM', SIGTERMHandler);
