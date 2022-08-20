@@ -1,5 +1,10 @@
-import { ApiError } from '@/utils/ApiError/ApiError';
-import { RequestWithBody } from '@/typings/typings';
+import {
+  AcceptedException,
+  ConflictException,
+  ForbiddenException,
+  NotFoundException,
+} from '@/utils/CustomExceptions';
+import { RequestWithBody } from '@/interfaces/interfaces';
 import { Response } from 'express';
 import { UserRole } from '@/config/roles';
 import { catchAsync } from '@/utils/catchAsync/catchAsync';
@@ -27,9 +32,7 @@ const getAllUsers = catchAsync(
     ]);
 
     if (!users) {
-      return res.status(404).json({
-        message: 'No users found',
-      });
+      throw new NotFoundException('No users found');
     }
 
     res.status(httpStatus.OK).json({
@@ -51,10 +54,7 @@ const getUser = catchAsync(
     const user = await User.findById(req.params.userId);
 
     if (!user) {
-      return res.status(404).json({
-        status: httpStatus.NOT_FOUND,
-        message: 'User not found',
-      });
+      throw new NotFoundException(`User with id ${req.params.userId} not found`);
     }
 
     res.status(httpStatus.OK).json({
@@ -75,10 +75,7 @@ const register = catchAsync(
     const { username, email, password } = req.body;
 
     if (await User.isEmailTaken(email!)) {
-      return res.status(httpStatus.CONFLICT).json({
-        status: httpStatus.CONFLICT,
-        message: 'Email is already taken',
-      });
+      throw new ConflictException('Email is already taken');
     }
 
     const user = await User.create({
@@ -116,11 +113,7 @@ const update = catchAsync(
       userId !== authenticatedUser._id?.toString()
       && authenticatedUser.role !== UserRole.ADMIN
     ) {
-      throw new ApiError({
-        statusCode: httpStatus.FORBIDDEN,
-        message: 'You are not allowed to update this user',
-        isOperational: false,
-      });
+      throw new ForbiddenException('You are not allowed to update this user');
     }
 
     const {
@@ -131,10 +124,7 @@ const update = catchAsync(
     } = req.body;
 
     if (!password && !username && !email && !profileImage) {
-      return res.status(httpStatus.ACCEPTED).json({
-        status: httpStatus.ACCEPTED,
-        message: 'No fields to update',
-      });
+      throw new AcceptedException('No changes were made');
     }
 
     const updatedUser = await User.findByIdAndUpdate(
@@ -149,11 +139,7 @@ const update = catchAsync(
     );
 
     if (!updatedUser) {
-      throw new ApiError({
-        statusCode: httpStatus.NOT_FOUND,
-        message: 'User not found',
-        isOperational: false,
-      });
+      throw new NotFoundException('User not found');
     }
 
     res.status(200).json({
@@ -177,20 +163,13 @@ const remove = catchAsync(
       userId !== authenticatedUser._id?.toString()
       && authenticatedUser.role !== UserRole.ADMIN
     ) {
-      throw new ApiError({
-        statusCode: httpStatus.FORBIDDEN,
-        message: 'You are not allowed to delete this user',
-        isOperational: false,
-      });
+      throw new ForbiddenException('You are not allowed to delete this user');
     }
 
     const removedUser = await User.findByIdAndDelete(userId);
 
     if (!removedUser) {
-      return res.status(httpStatus.NOT_FOUND).json({
-        status: httpStatus.NOT_FOUND,
-        message: 'User not found',
-      });
+      throw new NotFoundException('User not found');
     }
 
     res.status(httpStatus.ACCEPTED).json({

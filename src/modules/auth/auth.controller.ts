@@ -1,4 +1,4 @@
-import { RequestWithBody } from '@/typings/typings';
+import { RequestWithBody } from '@/interfaces/interfaces';
 import { Response } from 'express';
 import { catchAsync } from '@/utils/catchAsync/catchAsync';
 import httpStatus from 'http-status-codes';

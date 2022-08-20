@@ -1,32 +1,28 @@
-interface ApiErrorConstructor {
-  statusCode: number;
-  message: string;
-  isOperational?: boolean;
-  stack?: string;
-}
-
 /**
  * @class ApiError
  * @desc Custom error class to return error responses
- * @param statusCode - The status code of the error
- * @param message - The message of the error
- * @param isOperational - Whether the error is operational or not. Default is true.
- * @param stack - The stack of the error. Default is empty string.
+ * @param {string} message - The message of the error
+ * @param {number} statusCode - The status code of the error
+ * @param {boolean} isOperational - Whether the error is operational or not. Default is true. Defaults to true.
+ * @param {string} stack - The stack of the error. Default is empty string. Defaults to empty string.
  */
 export class ApiError extends Error {
   statusCode: number;
   isOperational: boolean;
+  stack: string;
 
-  constructor({
+  constructor(
+    message: string,
+    statusCode: number,
     isOperational = true,
-    message,
     stack = '',
-    statusCode,
-  }: ApiErrorConstructor) {
+  ) {
     super(message);
 
+    this.name = 'ApiError';
     this.statusCode = statusCode;
     this.isOperational = isOperational;
+    this.stack = stack;
 
     if (stack) {
       this.stack = stack;

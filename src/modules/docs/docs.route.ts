@@ -1,10 +1,10 @@
 import { bearerAuth } from './securitySchemes.swagger';
 import { env } from '@/config/env';
-import authPaths from '@/features/auth/swagger/auth.swagger.paths';
+import authPaths from '@/modules/auth/swagger/auth.swagger.paths';
 import express from 'express';
 import swaggerDefinition from './swaggerDef';
 import swaggerUi from 'swagger-ui-express';
-import userPaths from '@/features/user/swagger/users.swagger.paths';
+import userPaths from '@/modules/user/swagger/users.swagger.paths';
 
 const router = express.Router();
 

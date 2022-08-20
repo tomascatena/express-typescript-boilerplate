@@ -1,7 +1,7 @@
-import authRoutes from '@/features/auth/auth.route';
-import docsRoutes from '@/features/docs/docs.route';
+import authRoutes from '@/modules/auth/auth.route';
+import docsRoutes from '@/modules/docs/docs.route';
 import express from 'express';
-import userRoutes from '@/features/user/user.route';
+import userRoutes from '@/modules/user/user.route';
 
 const router = express.Router();
 

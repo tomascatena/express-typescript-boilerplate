@@ -1,11 +1,10 @@
-import { ApiError } from '@/utils/ApiError/ApiError';
 import { NextFunction, Response } from 'express';
-import { RequestWithBody } from '@/typings/typings';
+import { RequestWithBody } from '@/interfaces/interfaces';
+import { UnauthorizedException } from '@/utils/CustomExceptions';
 import { env } from '@/config/env';
 import { header } from 'express-validator';
 import { validationsResults } from './validationsResults';
-import User from '@/features/user/User.model';
-import httpStatus from 'http-status-codes';
+import User from '@/modules/user/User.model';
 import jsonwebtoken from 'jsonwebtoken';
 import validator from 'validator';
 
@@ -35,11 +34,7 @@ export const requireJWTAuth = [
       const authenticatedUser = await User.findById(authenticatedUserId);
 
       if (!authenticatedUser) {
-        throw new ApiError({
-          message: 'Not authorized to access this endpoint',
-          statusCode: httpStatus.UNAUTHORIZED,
-          isOperational: false,
-        });
+        throw new UnauthorizedException('Not authorized to access this endpoint');
       }
 
       req.authenticatedUserId = authenticatedUserId;
